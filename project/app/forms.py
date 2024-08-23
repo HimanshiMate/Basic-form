@@ -9,3 +9,9 @@ class Ragistration(forms.ModelForm):
     class Meta:
         model=stu_Ragistration
         fields='__all__'
+
+
+class Login(forms.ModelForm):
+    class Meta:
+        model=stu_Ragistration
+        fields=('email','contact')

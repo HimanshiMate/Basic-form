@@ -16,7 +16,22 @@ def home(request):
             lname=form.cleaned_data["lname"]
             email=form.cleaned_data["email"]
             contact=form.cleaned_data["contact"]
-            print(fname,lname,email,contact)
-            form.save()
+            user=stu_Ragistration.objects.filter(email=email)
+            if user:
+                msg="Email already exist"
+                form=Ragistration()
+                return render(request,'home.html',{'form':form, 'msg':msg})
+            else:
+                form.save()
+                msg="registration successfully"
+                form=Ragistration()
+                return render(request,'home.html',{'form':form,'msg':msg})
+
+            # print(fname,lname,email,contact)
+            # form.save()
             # data={"fname":fname,"lname":lname,"email":email,"contact":contact}
     return render(request,"home.html",{"form":form})
+
+def login(request):
+    form=Login()
+    return render(request,'login.html',{'form':form})
