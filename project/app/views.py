@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from .forms import *
 
@@ -34,4 +35,16 @@ def home(request):
 
 def login(request):
     form=Login()
+    if request.method=='POST':
+        data=Login(request.POST)
+        login_email=data.cleaned_data['email']
+        login_contact=data.cleaned_data['contact']
+        user=stu_Ragistration.objects.filter(email=login_email)
+        if user:
+            user=stu_Ragistration.objects.get(email=login_email)
+            print(user)
     return render(request,'login.html',{'form':form})
+
+def logindata(request):
+
+    return HttpResponse("done.......")
